@@ -1,6 +1,5 @@
 import os
-from .oidc_discover import OidcDiscover
-from .JwtEncoder import JwtEncoder
+from JwtEncoder import JwtEncoder
 from .bottle_utils import (
             _Log, 
             UnauthorizedError, 
@@ -10,7 +9,7 @@ from .bottle_utils import (
 
 DEBUG = os.environ.get('DEBUG',False)
 
-class JwtAuth(OidcDiscover):
+class JwtAuth:
     
     api = 2
     name = 'JwtAuth'
@@ -26,7 +25,7 @@ class JwtAuth(OidcDiscover):
         self.logger = log
         self.issuer = issuer
 
-        self.jwt = JwtEncoder(key_config=jwt_config)
+        self.jwt = JwtEncoder(jwt_config=jwt_config)
 
 
     def setup(self, app):

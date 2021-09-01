@@ -10,3 +10,5 @@ x
 .cache_dir
 *.pem
 *.REST
+bapp.py
+test_encoder.py

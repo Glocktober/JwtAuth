@@ -114,57 +114,9 @@ def viewy():
 
 The `jwt_config` option is a dict that can take multiple forms, depending on how **JwtAuth** is deployed. This `dict` is provided to an underlying class **JwtEncoder** that itself uses the **PyJWT** module to implement both encoding and decoding of JWT's - though **bottleJwtAuth** is only concerned with decoding of JWTs.
 
+Details on configuring **jwt_config** are [available in the readme.](https://github.com/Glocktober/JwtEncoder)
 **JwtEncoder** provides a configuration interface to support a few different JST encryption methods, depending on what your needs are.  These include:
 * shared key
 * providing a public and private key
 * providing an X509 RSA certificate
 * JWKS url
-
-#### shared key (symmetric key)
-
-To use a symmetric key **`jwt_config`** is of the form:
-
-```python
-jwt_config = {
-    'key': 'mysecretkey',
-    'alg': 'HS256'  # any valid JWT HS type
-    'iss': 'myissuer urn'
-}
-```
-
-#### public/private key (asymmetric key)
-
-```python
-jwt_config = {
-    'pubkey': b'------BEGIN PUBLIC KEY....',
-    'privkey': b'------BEGIN PRIVATE KEY...',
-    'alg': 'RS256',
-    'iss': 'my issuer urn'
-}
-```
-Note that if if only `pubkey` is provided the encoder can only decode messages - this is sufficient for the role of **JwtAuth**
-
-#### X509 certificate
-```python
-jwt_config = {
-    'cert' : b`----BEGIN CERTIFICATE---....',
-    'alg': 'RS256',
-    'iss': 'my issuer urn'
-}
-```
-This supports only token decode.
-
-No validation of the X509 certificate is made - only the public key is retrieved.
-
-#### JWKS retrieval
-```python
-jst_config = {
-    'jwks_url': 'https://.....',
-    'iss': 'my issuer urn'
-}
-This retrieves JWKS keys (generally from an OIDC provider)  The retrival specifies the algorithm used.
-
-
-
-
-

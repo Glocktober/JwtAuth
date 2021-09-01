@@ -79,6 +79,12 @@ class   Jwks:
         return pub_keys
 
 
+    def encode(self, *args, **kwargs):
+        """ This module can only decode JWKS """
+        
+        raise Exception('No private key configured for JWT encoding')
+    
+
     def decode(self, token, options={}, **kwargs):
         """
         jwks.decode(token, **kwargs)
